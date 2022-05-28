@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 
 import com.example.tfg2.adapters.AdapterFragment;
@@ -25,10 +27,23 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        auth = FirebaseAuth.getInstance();
+
         tablelayout1 = findViewById(R.id.tab_layout);
         viewpage2 = findViewById(R.id.view_page);
 
+        FirebaseUser user = auth.getCurrentUser();
 
+        if(user == null){
+
+
+
+        }else{
+            Intent intent = new Intent(this,HomeActivity.class);
+            startActivity(intent);
+        }
+
+        Log.d("peluca", "Usuaro" + auth.getCurrentUser());
 
         viewpage2.setAdapter(new AdapterFragment(getSupportFragmentManager(),getLifecycle()));
         viewpage2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
@@ -37,6 +52,7 @@ public class MainActivity extends AppCompatActivity{
                 tablelayout1.selectTab(tablelayout1.getTabAt(position));
             }
         });
+
 
         tablelayout1.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -61,8 +77,6 @@ public class MainActivity extends AppCompatActivity{
         myRef.setValue("Hello, World!");
 
     }
-
-
 
 
 }

@@ -56,6 +56,13 @@ public class RegisterFragment extends Fragment {
             }
         });
 
+        singin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         return root;
     }
 
@@ -65,7 +72,7 @@ public class RegisterFragment extends Fragment {
         String user_email = email_register.getText().toString().trim();
         String user_password = password_register.getText().toString().trim();
 
-        Log.d("user", user_name + " password " + user_password);
+
 
         if(user_name.isEmpty()){
             name_register.setError("El campo no puede estar vacio");
@@ -89,8 +96,9 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(getActivity(),"Registro Completado con exito", Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(getActivity(),"Registro Completado con exito" + auth.getCurrentUser(), Toast.LENGTH_SHORT).show();
+                    FirebaseUser user2 = auth.getCurrentUser();
+                    Log.d("currentUser", "onComplete: " + user2 );
                 }else{
                     Toast.makeText(getActivity(), "ERROR ", Toast.LENGTH_SHORT).show();
                     Log.e("ERRRROR", "onComplete: ", task.getException() );
