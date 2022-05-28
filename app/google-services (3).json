@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "540003502897",
+    "firebase_url": "https://tfg-prueba-5fdd4-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "tfg-prueba-5fdd4",
+    "storage_bucket": "tfg-prueba-5fdd4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:540003502897:android:47176d2cd419f242e7fe10",
+        "android_client_info": {
+          "package_name": "com.example.tfg2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "540003502897-stn24so33neur625hnlllikrou3fiomk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7SKTjb3WB7nyjdilJ_3j69I4O-eFGM4Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "540003502897-stn24so33neur625hnlllikrou3fiomk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
