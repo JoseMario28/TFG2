@@ -18,7 +18,17 @@
             android:id="@+id/toolbar"
             app:title="Barra de Navegacion"
             android:background="@color/light_black"
-            app:titleTextColor="@color/white"/>
+            app:titleTextColor="@color/white"
+
+            />
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+
+            />
 
     </RelativeLayout>
 

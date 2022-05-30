@@ -1,5 +1,6 @@
 package com.example.tfg2.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
@@ -14,12 +15,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.tfg2.HomeActivity;
+import com.example.tfg2.Models.User;
 import com.example.tfg2.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterFragment extends Fragment {
 
@@ -27,13 +31,14 @@ public class RegisterFragment extends Fragment {
    EditText name_register, email_register, password_register;
    TextView singin;
    FirebaseAuth auth;
+   FirebaseDatabase firebaseDatabase;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         auth = FirebaseAuth.getInstance();
-        FirebaseUser user =  auth.getCurrentUser();
-        Log.d("TAG", "User " + user);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
     }
 
     @Override
@@ -52,6 +57,7 @@ public class RegisterFragment extends Fragment {
         register_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 registrar_usuario();
             }
         });
@@ -96,9 +102,13 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(getActivity(),"Registro Completado con exito" + auth.getCurrentUser(), Toast.LENGTH_SHORT).show();
-                    FirebaseUser user2 = auth.getCurrentUser();
-                    Log.d("currentUser", "onComplete: " + user2 );
+
+                    User user = new User(user_name,"",user_email,user_password);
+                    String id = task.getResult().getUser().getUid();
+                    firebaseDatabase.getReference().child("User").child(id).setValue(user);
+                    Intent intent = new Intent(getActivity(), HomeActivity.class);
+                    startActivity(intent);
+
                 }else{
                     Toast.makeText(getActivity(), "ERROR ", Toast.LENGTH_SHORT).show();
                     Log.e("ERRRROR", "onComplete: ", task.getException() );
