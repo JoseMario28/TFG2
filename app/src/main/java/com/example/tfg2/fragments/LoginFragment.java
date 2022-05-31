@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.tfg2.HomeActivity;
 import com.example.tfg2.R;
@@ -79,7 +80,7 @@ public class LoginFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), HomeActivity.class);
                     startActivity(intent);
                 }else{
-
+                    Toast.makeText(getActivity(), "Email o contraseña INCORRECTOS!", Toast.LENGTH_LONG).show();
                 }
             }
         });

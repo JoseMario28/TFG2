@@ -13,11 +13,11 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/toolbar"
+            android:background="@color/bacano"
             app:title="Barra de Navegacion"
-            android:background="@color/light_black"
             app:titleTextColor="@color/white"
 
             />
@@ -33,10 +33,15 @@
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
+
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/menu"
         app:menu="@menu/icon_menu"
+        app:itemTextColor="@color/black"
+        app:itemIconTint="@color/black"
+        android:backgroundTint="@color/white"
+
         app:headerLayout="@layout/navheader"
         android:layout_gravity="start"
         />

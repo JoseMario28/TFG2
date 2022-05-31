@@ -8,4 +8,7 @@
     <color name="black">#000000</color>
     <color name="light_black">#A19E9E</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="bacano">#A55183</color>
+    <color name="bacano2">#FFC895B4</color>
+
 </resources>
