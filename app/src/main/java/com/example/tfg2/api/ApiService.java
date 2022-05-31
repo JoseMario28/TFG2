@@ -59,8 +59,8 @@ public interface ApiService {
     //obtener una categoria especifica
     //'https://fakestoreapi.com/products/category/jewelery'
     //este no esta realizado
-    @GET("products/categories")
-    Call<List<Producto>> getSelectCategories(@Query("categories") String categories);
+    @GET("products/category/{tipo}")
+    Call<List<Producto>> getSelectCategories(@Path(value = "tipo") String tipo);
 
     //añadir un producto
     //https://fakestoreapi.com/products'

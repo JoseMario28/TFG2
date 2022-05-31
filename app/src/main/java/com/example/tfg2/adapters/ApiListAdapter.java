@@ -26,12 +26,17 @@ public class ApiListAdapter extends RecyclerView.Adapter<ApiListAdapter.ViewHold
 
     List<Producto> productoList;
     Context context;
+    final ApiListAdapter.OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        void onItemClick(Producto item);
+    }
 
 
-
-    public ApiListAdapter(List<Producto> productoList, Context context) {
+    public ApiListAdapter(List<Producto> productoList, Context context,ApiListAdapter.OnItemClickListener listener) {
         this.productoList = productoList;
         this.context = context;
+        this.listener = listener;
     }
 
     @NonNull
@@ -59,7 +64,12 @@ public class ApiListAdapter extends RecyclerView.Adapter<ApiListAdapter.ViewHold
             }
         });
 
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onItemClick(item);
+            }
+        });
 
 
         //tratamiento de la imagen con glide
@@ -87,6 +97,7 @@ public class ApiListAdapter extends RecyclerView.Adapter<ApiListAdapter.ViewHold
             list_element_txt_descripcion = itemView.findViewById(R.id.list_element_txt_descripcion);
             list_element_txt_precio = itemView.findViewById(R.id.list_element_txt_precio);
             list_element_img = itemView.findViewById(R.id.list_element_img);
+
 
         }
 
