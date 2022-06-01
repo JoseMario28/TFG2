@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,19 +11,31 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Carrito"
-            android:textColor="@color/black"/>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cart_recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="60dp"
+            android:layout_height="480dp"
 
-            />
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/bt_finalizar_compra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="Finalizar Compra"
+            android:layout_marginTop="37dp"
+           android:backgroundTint="@color/bacano"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cart_recyclerview" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

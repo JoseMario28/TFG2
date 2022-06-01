@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tfg2.HomeActivity;
+import com.example.tfg2.LoadingDialog;
 import com.example.tfg2.Models.User;
 import com.example.tfg2.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,6 +45,8 @@ public class ProfileFragment extends Fragment {
     FirebaseUser user;
     FirebaseAuth auth;
 
+    LoadingDialog dialog;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +55,7 @@ public class ProfileFragment extends Fragment {
         user = auth.getCurrentUser();
         myRef = firebaseDatabase.getReference("User");
 
+        dialog = new LoadingDialog(getActivity());
 
     }
 
@@ -109,7 +113,7 @@ public class ProfileFragment extends Fragment {
 
     public void coger_datos_usuario_logueado(){
 
-
+dialog.startLoadingDialog();
 
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -129,7 +133,7 @@ public class ProfileFragment extends Fragment {
 
                         Picasso.get().load("https://www.w3schools.com/howto/img_avatar.png").into(profile_img);
 
-
+                        dialog.dismissDialog();
 
                         // Log.d("facil", "Dentro if si se cumple "  + logged_user.toString() );
                         break;

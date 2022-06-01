@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.tfg2.LoadingDialog;
 import com.example.tfg2.Models.Producto;
 import com.example.tfg2.R;
 import com.example.tfg2.adapters.AdapterFragment;
@@ -44,12 +45,13 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
     RecyclerView categoryRecyclerView;
 
+    LoadingDialog dialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        dialog = new LoadingDialog(getActivity());
 
     }
 
@@ -80,6 +82,7 @@ public class HomeFragment extends Fragment {
     //Coger productos de la api y cargarlos en el recyclerView
 
     public void cargar_categorias_api(){
+
         ApiService apiService = ApiCliente.getCliente().create(ApiService.class);
 
         Call<List<String>> listCall = apiService.getAllCategories();
@@ -111,6 +114,7 @@ public class HomeFragment extends Fragment {
                 categoryRecyclerView.setAdapter(apiListCategory);
 
 
+
             }
 
             @Override
@@ -125,6 +129,7 @@ public class HomeFragment extends Fragment {
     }
 
     public void cargar_productos_por_categoria(String category){
+        dialog.startLoadingDialog();
         if(category.equals("Todas")){
             cargar_prodcutos_api();
 
@@ -155,7 +160,7 @@ public class HomeFragment extends Fragment {
                     });
                     recyclerView.setAdapter(apiListAdapter);
 
-
+                    dialog.dismissDialog();
                 }
 
                 @Override
@@ -171,6 +176,9 @@ public class HomeFragment extends Fragment {
     }
     
     public void cargar_prodcutos_api(){
+
+        dialog.startLoadingDialog();
+
 
         ApiService apiService = ApiCliente.getCliente().create(ApiService.class);
 
@@ -194,7 +202,7 @@ public class HomeFragment extends Fragment {
                 });
                 recyclerView.setAdapter(apiListAdapter);
 
-
+                dialog.dismissDialog();
 
             }
 

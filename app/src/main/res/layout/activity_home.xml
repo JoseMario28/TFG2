@@ -28,7 +28,7 @@
 
 
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="7dp"
             android:layout_marginEnd="14dp"
             android:padding="5dp"
             android:src="@drawable/ic_baseline_shopping_cart_24"
@@ -37,7 +37,7 @@
             app:ibv_badgeTextSize="13sp"
             app:ibv_badgeTextStyle="bold"
             app:ibv_badgeValue="0"
-            app:ibv_fixedBadgeRadius="12dp" />
+            app:ibv_fixedBadgeRadius="11dp" />
 
         <FrameLayout
             android:id="@+id/container"
