@@ -14,22 +14,38 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.tfg2.Models.Producto;
 import com.example.tfg2.Models.User;
+import com.example.tfg2.adapters.ApiListAdapter;
+import com.example.tfg2.fragments.CartFragment;
 import com.example.tfg2.fragments.HomeFragment;
 import com.example.tfg2.fragments.LoginFragment;
+import com.example.tfg2.fragments.ProductDetailsFragment;
 import com.example.tfg2.fragments.ProfileFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import ru.nikartm.support.ImageBadgeView;
+
 public class HomeActivity extends AppCompatActivity {
+
+    public static List<Producto> productoList_cart = new ArrayList<>();
+
 
     NavigationView navigationView;
     ActionBarDrawerToggle toggle;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
+
+    ImageView cart_image_view;
+    public static ImageBadgeView imageBadgeView;
 
     FirebaseUser logged_user;
     FirebaseAuth auth;
@@ -50,8 +66,23 @@ public class HomeActivity extends AppCompatActivity {
         Log.d("intent","aaaaaaaa " + user);
 
         //Menu derecha //--------------------------------------------------------------- //---------------------------------------------------------------
+        imageBadgeView = findViewById(R.id.cart_badge_img);
+
+        imageBadgeView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CartFragment pf = new CartFragment();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container,pf)
+                        .addToBackStack(null)
+                        .commit();
+
+            }
+        });
+
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         navigationView = findViewById(R.id.menu);
         drawerLayout = findViewById(R.id.drawer);
@@ -86,6 +117,8 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+
     }
 
     public void sign_out(){
@@ -94,6 +127,7 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
     //--------------------------------------------------------------- //---------------------------------------------------------------
+
 
         /*
         bt = findViewById(R.id.btn_cerrar);

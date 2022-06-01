@@ -96,11 +96,11 @@ public class HomeFragment extends Fragment {
                 categoriesList.add(new String("Todas"));
                 apiListCategory = new ApiListCategory(categoriesList,getActivity(),new ApiListCategory.OnCategoryClickListener(){
                     @Override
-                    public void onItemCategoryClick(String item) {
+                    public void onItemCategoryClick(String category) {
 
 
 
-                                cargar_productos_por_categoria(item);
+                                cargar_productos_por_categoria(category);
 
 
 
