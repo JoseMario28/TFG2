@@ -17,7 +17,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
- * Metodos para acceder a la API
+ * Metodos para acceder Prueba la API
  * GET: consultar información de un recurso.
  * DELETE: eliminar un recurso determinado.
  * POST: crear un recurso nuevo.
@@ -67,7 +67,7 @@ public interface ApiService {
     @POST("products")
     Call<Producto> createProducto(@Body Producto producto);
 
-    //otra forma de añadir, es indicando los campos a rellenar
+    //otra forma de añadir, es indicando los campos Prueba rellenar
     @FormUrlEncoded
     @POST("products")
     Call<Producto> createProductoForm(

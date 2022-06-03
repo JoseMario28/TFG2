@@ -67,11 +67,11 @@ public class CartFragment extends Fragment {
             public void onClick(View view) {
                 precio_total_factura = calcular_precio_total();
                 String fecha = String.valueOf(todaysDate = LocalDate.now());
+                String id= database.getReference().push().getKey();
 
+                Factura factura = new Factura(id,fecha,HomeActivity.productoList_cart,precio_total_factura);
 
-                Factura factura = new Factura(fecha,HomeActivity.productoList_cart,precio_total_factura);
-
-                database.getReference().child("facturas").child(user.getUid()).push().setValue(factura);
+                database.getReference().child("facturas").child(user.getUid()).child(id).setValue(factura);
                 Log.i("factura", "onClick: " + todaysDate);
 
                 Intent intent = new Intent(getActivity(),HomeActivity.class);

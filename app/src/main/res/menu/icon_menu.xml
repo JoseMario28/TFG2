@@ -11,7 +11,10 @@
         <item android:id="@+id/menu_setting"
             android:icon="@drawable/ic_baseline_settings_24"
             android:title="Settings"/>
-
+        <item android:id="@+id/menu_invoice_history"
+            android:title="Invoice History"
+            android:icon="@drawable/ic_invoice_history"
+            />
 
     </group>
 

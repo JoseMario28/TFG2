@@ -2,15 +2,18 @@ package com.example.tfg2.Models;
 
 public class Producto {
 
-    private Integer id;
-    private String title;
-    private String price;
-    private String category;
-    private String description;
-    private String image;
+    public Integer id;
+    public String title;
+    public String price;
+    public String category;
+    public String description;
+    public String image;
 
     //general un constructor con los datos de inserccion
 
+
+    public Producto() {
+    }
 
     public Producto(String title, String price, String category, String description, String image) {
         this.title = title;

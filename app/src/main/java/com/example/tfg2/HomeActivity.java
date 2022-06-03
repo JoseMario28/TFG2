@@ -22,6 +22,7 @@ import com.example.tfg2.Models.User;
 import com.example.tfg2.adapters.ApiListAdapter;
 import com.example.tfg2.fragments.CartFragment;
 import com.example.tfg2.fragments.HomeFragment;
+import com.example.tfg2.fragments.InvoiceHistoryFragment;
 import com.example.tfg2.fragments.LoginFragment;
 import com.example.tfg2.fragments.ProductDetailsFragment;
 import com.example.tfg2.fragments.ProfileFragment;
@@ -101,15 +102,19 @@ public class HomeActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.menu_home:
                         temp = new HomeFragment();
+                        toolbar.setTitle("Productos");
                         break;
                     case R.id.menu_setting:
                         temp = new ProfileFragment();
+                        toolbar.setTitle("Perfil");
                         break;
                     case R.id.menu_logout:
                         sign_out();
                         temp = new LoginFragment();
-                        Log.d("logueado", "onNavigationItemSelected: " + logged_user);
                         break;
+                    case R.id.menu_invoice_history:
+                        temp = new InvoiceHistoryFragment();
+                        toolbar.setTitle("Facturas");
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,temp).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
