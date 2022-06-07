@@ -70,6 +70,7 @@ public class MyProductsFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_my_products, container, false);
 
+        myproductoList.clear();
 
         add_product_to_my_products = root.findViewById(R.id.add_product_to_my_products);
         txt_no_sell_products = root.findViewById(R.id.txt_no_sell_products);
@@ -85,6 +86,7 @@ public class MyProductsFragment extends Fragment {
         dialog.startLoadingDialog();
 
         database.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()) {

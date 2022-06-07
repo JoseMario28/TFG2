@@ -67,7 +67,13 @@ public class AdapterMyProducts extends RecyclerView.Adapter<AdapterMyProducts.Vi
     public void onBindViewHolder(@NonNull AdapterMyProducts.ViewHolder holder, int position) {
         Producto item = myproductoList.get(position);
 
+        if (item.getVendido() == true){
+            Log.i("boolean", "onBindViewHolder: " + item.getVendido());
+            holder.itemView.setBackgroundColor(Color.GREEN);
+        }else{
+            Log.i("boolean", "no entra: " + item.getVendido());
 
+        }
 
         //Log.i("firebasedb", "onBindViewHolder: "+ item.getImage());
 
@@ -111,6 +117,7 @@ public class AdapterMyProducts extends RecyclerView.Adapter<AdapterMyProducts.Vi
                 notifyDataSetChanged();
             }
         });
+
 
 
 
