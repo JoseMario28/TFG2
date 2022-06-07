@@ -122,14 +122,14 @@ public class InvoiceHistoryFragment extends Fragment {
 
                 invoiceAdapter = new InvoiceAdapter(invoice,getActivity(),new InvoiceAdapter.OnItemClickListener(){
                     @Override
-                    public void onItemClick(Producto item) {
+                    public void onItemClick(Factura item) {
 
 
                     }
                 });
                 recyclerView.setAdapter(invoiceAdapter);
-                //-------------------------------------------------------------------------------------------
 
+                //-----------------------------------------------------------------------------------------
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

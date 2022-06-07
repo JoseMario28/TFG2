@@ -77,7 +77,7 @@ public class HomeActivity extends AppCompatActivity {
         nombre_usuario();
         //Menu derecha //--------------------------------------------------------------- //---------------------------------------------------------------
         imageBadgeView = findViewById(R.id.cart_badge_img);
-
+        imageBadgeView.setBadgeValue(HomeActivity.productoList_cart.size());
         imageBadgeView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

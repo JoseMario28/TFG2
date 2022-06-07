@@ -32,22 +32,6 @@ public interface ApiService {
     @GET("products")
     Call<List<Producto>> getAllProducto();
 
-    //buscar y mostrar un producto
-    //'https://fakestoreapi.com/products/1'
-    @GET("products/{id}")
-    Call<Producto> getProduct(@Path("id") int id);
-
-    //mostrar una cantidad de productos
-    //'https://fakestoreapi.com/products?limit=5'
-    @GET("products")
-    Call<List<Producto>> getLimit(
-            @Query("limit") Integer limit);
-
-    //mostrar los productos ordenados
-    //'https://fakestoreapi.com/products?sort=desc'
-    @GET("products")
-    Call<List<Producto>> getProductoOrdenado(
-            @Query("sort") String sort);
 
 
     //obtener todas las categorias
@@ -58,35 +42,10 @@ public interface ApiService {
 
     //obtener una categoria especifica
     //'https://fakestoreapi.com/products/category/jewelery'
-    //este no esta realizado
     @GET("products/category/{tipo}")
     Call<List<Producto>> getSelectCategories(@Path(value = "tipo") String tipo);
 
-    //añadir un producto
-    //https://fakestoreapi.com/products'
-    @POST("products")
-    Call<Producto> createProducto(@Body Producto producto);
 
-    //otra forma de añadir, es indicando los campos Prueba rellenar
-    @FormUrlEncoded
-    @POST("products")
-    Call<Producto> createProductoForm(
-            @Field("title") String title,
-            @Field("price") String price,
-            @Field("description") String description
-    );
-
-    //modificar un producto
-    //'https://fakestoreapi.com/products/7'
-    @PUT("products/{id}")
-    Call<Producto> putProducto(@Path("id") int id, @Body Producto producto);
-
-    @PATCH("products/{id}")
-    Call<Producto> patchProducto(@Path("id") int id, @Body Producto producto);
-
-    //borrar producto
-    @DELETE("products/{id}")
-    Call<Void> deleteProducto(@Path("id") int id);
 
 
 

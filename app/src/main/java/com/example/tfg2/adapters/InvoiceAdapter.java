@@ -1,6 +1,8 @@
 package com.example.tfg2.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -16,6 +20,8 @@ import com.example.tfg2.HomeActivity;
 import com.example.tfg2.Models.Factura;
 import com.example.tfg2.Models.Producto;
 import com.example.tfg2.R;
+import com.example.tfg2.fragments.FacturaDetailsFragment;
+import com.example.tfg2.fragments.ProductDetailsFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -29,7 +35,7 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
     final InvoiceAdapter.OnItemClickListener listener;
 
     public interface OnItemClickListener {
-        void onItemClick(Producto item);
+        void onItemClick(Factura item);
     }
 
 
@@ -62,6 +68,17 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.ViewHold
         holder.bt_details_products_invoice_history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle datosAEnviar = new Bundle();
+
+                datosAEnviar.putSerializable("factura",item);
+
+                FacturaDetailsFragment fd = new FacturaDetailsFragment();
+                fd.setArguments(datosAEnviar);
+
+
+
+
+
 
             }
         });

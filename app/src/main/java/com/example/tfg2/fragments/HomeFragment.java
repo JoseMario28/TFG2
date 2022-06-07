@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -200,7 +202,7 @@ public class HomeFragment extends Fragment {
                 apiListAdapter = new ApiListAdapter(product_list, getActivity(), new ApiListAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(Producto item) {
-                        moveToDescription();
+                        moveToDescription(item);
                     }
                 });
                 recyclerView.setAdapter(apiListAdapter);
@@ -223,13 +225,21 @@ public class HomeFragment extends Fragment {
 
     }
 
-    public void moveToDescription(){
+    public void moveToDescription(Producto item){
+        Bundle datosAEnviar = new Bundle();
 
-        ProfileFragment pf = new ProfileFragment();
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container,pf)
-                .addToBackStack(null)
-                .commit();
+        datosAEnviar.putSerializable("producto",item);
+        ProductDetailsFragment pf = new ProductDetailsFragment();
+
+        pf.setArguments(datosAEnviar);
+
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, pf);
+        fragmentTransaction.addToBackStack(null);
+
+// Terminar transición y nos vemos en el fragmento de destino
+        fragmentTransaction.commit();
 
     }
 }

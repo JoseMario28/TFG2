@@ -1,6 +1,8 @@
 package com.example.tfg2.Models;
 
-public class Producto {
+import java.io.Serializable;
+
+public class Producto implements Serializable {
 
     public Integer id;
     public String title;
@@ -11,8 +13,10 @@ public class Producto {
 //-----------------------------------mis productos y subasta---------------------------------------
     String nombre;
     String idProducto;
+    Boolean vendido;
 
-    public Producto(String nombre,String title, String price, String category, String description, String image, String idProducto) {
+    public Producto(Boolean vendido,String nombre,String title, String price, String category, String description, String image, String idProducto) {
+        this.vendido = vendido;
         this.nombre = nombre;
         this.title = title;
         this.price = price;
@@ -20,6 +24,14 @@ public class Producto {
         this.description = description;
         this.image = image;
         this.idProducto = idProducto;
+    }
+
+    public Boolean getVendido() {
+        return vendido;
+    }
+
+    public void setVendido(Boolean vendido) {
+        this.vendido = vendido;
     }
 
     public String getNombre() {

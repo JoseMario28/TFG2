@@ -129,7 +129,7 @@ public class ProfileFragment extends Fragment {
                         profile_name.setText(ds.child("nombre").getValue().toString());
                         profile_last_name.setText(ds.child("apellidos").getValue().toString());
                         profile_name2.setText(ds.child("nombre").getValue().toString());
-                        profile_email.setText(ds.child("email").getValue().toString());
+                        //profile_email.setText(ds.child("email").getValue().toString());
                         txt_password.setText(ds.child("password").getValue().toString());
 
 

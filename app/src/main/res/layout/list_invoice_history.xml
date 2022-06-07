@@ -124,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="10dp"
-                android:src="@drawable/ic_baseline_delete_24"
+                android:src="@drawable/ic_baseline_assignment_24"
                 app:backgroundTint="@color/bacano"
 
                 app:layout_constraintBottom_toBottomOf="parent"

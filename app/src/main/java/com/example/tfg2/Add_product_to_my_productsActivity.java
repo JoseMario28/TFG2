@@ -144,7 +144,7 @@ public class Add_product_to_my_productsActivity extends AppCompatActivity {
             },product_name, product_price, img_product);
 
 
-            p = new Producto(HomeActivity.nombre,product_name, product_price,product_category,product_description,product_name+"/"+String.valueOf(product_price)+".png",product_id);
+            p = new Producto(false,HomeActivity.nombre,product_name, product_price,product_category,product_description,product_name+"/"+String.valueOf(product_price)+".png",product_id);
         }
         else{
             Toast.makeText(Add_product_to_my_productsActivity.this,"ERROR Seleccione una imagen",Toast.LENGTH_LONG).show();

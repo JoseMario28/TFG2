@@ -34,6 +34,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class CartFragment extends Fragment {
@@ -47,6 +49,9 @@ public class CartFragment extends Fragment {
     FirebaseAuth auth;
     FirebaseUser user;
     FirebaseDatabase database;
+
+    Map<String, Object> updateProduct = new HashMap<String,Object>();
+
 
     LocalDate todaysDate;
     double precio_total_factura = 0;
@@ -81,8 +86,15 @@ public class CartFragment extends Fragment {
 
 
                 for (Producto p : HomeActivity.productoList_cart) {
+
                     if (p.getIdProducto() != null){
                         database.getReference().child("products_second_hand").child(p.getIdProducto()).removeValue();
+                        for (Producto my_p : MyProductsFragment.myproductoList) {
+                            my_p.setVendido(true);
+                        }
+                        //updateProduct.put(p.getIdProducto(),p);
+                        //database.getReference().child("myproducts").child(user.getUid()).updateChildren(updateProduct);
+
                     }
 
                 }

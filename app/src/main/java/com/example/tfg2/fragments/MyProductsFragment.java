@@ -43,7 +43,7 @@ public class MyProductsFragment extends Fragment {
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
     AdapterMyProducts adapterMyProducts;
-    List<Producto> myproductoList = new ArrayList<>();
+    public static List<Producto> myproductoList = new ArrayList<>();
 
     FirebaseAuth auth;
     FirebaseUser user;
@@ -100,6 +100,7 @@ public class MyProductsFragment extends Fragment {
                             for (Producto p : nuevoValor.values()) {
                                 Log.i("factura", "Factura: "+ p.toString());
                                 myproductoList.add(p);
+
                             }
 
 /*

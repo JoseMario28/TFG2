@@ -4,63 +4,62 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.example.tfg2.Models.Producto;
 import com.example.tfg2.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ProductDetailsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class ProductDetailsFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public ProductDetailsFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create Prueba new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ProductDetailsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ProductDetailsFragment newInstance(String param1, String param2) {
-        ProductDetailsFragment fragment = new ProductDetailsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    TextView product_details_nombre,product_details_category,product_details_price,product_details_descripcion;
+    ImageView product_details_img;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product_details, container, false);
+        View root = inflater.inflate(R.layout.fragment_product_details, container, false);
+
+        product_details_nombre = root.findViewById(R.id.product_details_nombre);
+        product_details_category = root.findViewById(R.id.product_details_category);
+        product_details_price = root.findViewById(R.id.product_details_price);
+        product_details_descripcion = root.findViewById(R.id.product_details_descripcion);
+        product_details_img = root.findViewById(R.id.product_details_img);
+
+
+        Bundle datosRecuperaos= getArguments();
+
+        if (datosRecuperaos == null){
+            Toast.makeText(getActivity(), "No hay datos ", Toast.LENGTH_SHORT).show();
+        }
+
+        Producto p = (Producto) datosRecuperaos.getSerializable("producto");
+
+        product_details_nombre.setText(p.getTitle());
+        product_details_category.setText(p.getCategory());
+        product_details_price.setText(p.getPrice());
+        product_details_descripcion.setText(p.getDescription());
+
+        Glide.with(this)
+                .load(p.getImage())
+                .into(product_details_img);
+
+        Log.i("bundle", "onCreateView: " + p);
+
+        return root;
     }
 }
