@@ -57,7 +57,8 @@
         app:menu="@menu/icon_menu"
         app:itemTextColor="@color/black"
         app:itemIconTint="@color/black"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/bacano"
+
 
         app:headerLayout="@layout/navheader"
         android:layout_gravity="start"

@@ -15,20 +15,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.tfg2.Models.Producto;
 import com.example.tfg2.Models.User;
-import com.example.tfg2.adapters.ApiListAdapter;
 import com.example.tfg2.fragments.CartFragment;
 import com.example.tfg2.fragments.HomeFragment;
 import com.example.tfg2.fragments.InvoiceHistoryFragment;
 import com.example.tfg2.fragments.LoginFragment;
-import com.example.tfg2.fragments.ProductDetailsFragment;
+import com.example.tfg2.fragments.MyProductsFragment;
 import com.example.tfg2.fragments.ProfileFragment;
+import com.example.tfg2.fragments.SegundaManoFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,8 +51,12 @@ public class HomeActivity extends AppCompatActivity {
     Toolbar toolbar;
 
     ImageView cart_image_view;
-    public static ImageBadgeView imageBadgeView;
 
+    public static ImageBadgeView imageBadgeView;
+    public static String nombre;
+
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference myRef;
     FirebaseUser logged_user;
     FirebaseAuth auth;
 
@@ -58,20 +67,21 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        firebaseDatabase = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
+
+        myRef = firebaseDatabase.getReference("User");
         logged_user = auth.getCurrentUser();
 
-        Intent intent = getIntent();
-        User user = (User) intent.getSerializableExtra("usuario_logueado");
-        Log.d("intent","aaaaaaaa " + user);
 
+        nombre_usuario();
         //Menu derecha //--------------------------------------------------------------- //---------------------------------------------------------------
         imageBadgeView = findViewById(R.id.cart_badge_img);
 
         imageBadgeView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                toolbar.setTitle("Cesta");
                 CartFragment pf = new CartFragment();
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container,pf)
@@ -115,6 +125,16 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.menu_invoice_history:
                         temp = new InvoiceHistoryFragment();
                         toolbar.setTitle("Facturas");
+                        break;
+                    case R.id.menu_subasta:
+                        temp = new SegundaManoFragment();
+                        toolbar.setTitle("Segunda Mano");
+                        break;
+                    case R.id.menu_myProducts:
+                        temp = new MyProductsFragment();
+                        toolbar.setTitle("Mis prodcutos");
+                        break;
+
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.container,temp).commit();
                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -130,6 +150,43 @@ public class HomeActivity extends AppCompatActivity {
         auth.signOut();
         Intent intent = new Intent(navigationView.getContext(),MainActivity.class);
         startActivity(intent);
+    }
+
+    public void nombre_usuario(){
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //Log.d("facil", "Hooooolaa " + snapshot.getChildrenCount());
+                for(DataSnapshot ds : snapshot.getChildren()){
+                    // Log.d("facil", "Valor ds "  + ds.getKey() );
+
+                    //Log.d("facil", "Valor ds "  + ds.getValu );
+
+                    if(ds.getKey().equals(logged_user.getUid())){
+
+
+                        nombre = ds.child("nombre").getValue().toString();
+
+
+
+
+
+                        // Log.d("facil", "Dentro if si se cumple "  + logged_user.toString() );
+                        break;
+                    }else{
+                        Log.d("facil", "no entro");
+
+                    }
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
     //--------------------------------------------------------------- //---------------------------------------------------------------
 
@@ -154,4 +211,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
          */
+
+
 }

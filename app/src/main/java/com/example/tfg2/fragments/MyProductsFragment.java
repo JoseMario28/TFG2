@@ -1,5 +1,7 @@
 package com.example.tfg2.fragments;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,12 +13,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.tfg2.Add_product_to_my_productsActivity;
 import com.example.tfg2.HomeActivity;
+import com.example.tfg2.LoadingDialog;
 import com.example.tfg2.Models.Factura;
 import com.example.tfg2.Models.Producto;
 import com.example.tfg2.R;
+import com.example.tfg2.adapters.AdapterMyProducts;
+import com.example.tfg2.adapters.CartAdapter;
 import com.example.tfg2.adapters.InvoiceAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,34 +35,54 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
-public class InvoiceHistoryFragment extends Fragment {
-
+public class MyProductsFragment extends Fragment {
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
-    InvoiceAdapter invoiceAdapter;
+    AdapterMyProducts adapterMyProducts;
+    List<Producto> myproductoList = new ArrayList<>();
 
     FirebaseAuth auth;
     FirebaseUser user;
     DatabaseReference database;
 
-    ArrayList<Factura> invoice = new ArrayList<Factura>();
+    FloatingActionButton add_product_to_my_products;
+    RecyclerView my_products_recyclerView;
+    TextView txt_no_sell_products;
+
+    LoadingDialog dialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
-        database = FirebaseDatabase.getInstance().getReference("facturas");
+        database = FirebaseDatabase.getInstance().getReference("myproducts");
+        dialog = new LoadingDialog(getActivity());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_invoice_history, container, false);
+        View root = inflater.inflate(R.layout.fragment_my_products, container, false);
+
+
+        add_product_to_my_products = root.findViewById(R.id.add_product_to_my_products);
+        txt_no_sell_products = root.findViewById(R.id.txt_no_sell_products);
+
+        add_product_to_my_products.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), Add_product_to_my_productsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        dialog.startLoadingDialog();
 
         database.addValueEventListener(new ValueEventListener() {
             @Override
@@ -65,70 +93,39 @@ public class InvoiceHistoryFragment extends Fragment {
                         for (DataSnapshot nap : ds.getChildren()) {
                             //Log.i("factura", "onDataChangeee: " + nap.getValue());
                             //Log.i("factura", "asds: " + nap.child("productos").getValue());
-                            Map<String, Factura> nuevoValor = new HashMap<>();
-                            nuevoValor.put(nap.getKey(), nap.getValue(Factura.class));
+                            Map<String, Producto> nuevoValor = new HashMap<>();
+                            nuevoValor.put(nap.getKey(), nap.getValue(Producto.class));
 
                             //Log.i("factura", "HASHMAP " + nuevoValor.values());
-                            for (Factura f : nuevoValor.values()) {
-                                Log.i("factura", "Factura: "+ f.toString());
-                                invoice.add(f);
+                            for (Producto p : nuevoValor.values()) {
+                                Log.i("factura", "Factura: "+ p.toString());
+                                myproductoList.add(p);
                             }
 
 /*
-                        for (DataSnapshot a: nap.child("productos").getChildren()){
-                            ArrayList<Object> p =  new ArrayList<>();
-                            Log.i("factura", "onDataChange: " + a);
-                            Log.i("factura", "asdasdasfasfas: " + a.child("image").getValue());
-                        }
 
-
-
-                        //Factura f = new Factura(nap.child("date").getValue(),nap.child("precioTotal").getValue(),nap.child("productos"))
-                    }
-                        //Log.i("factura", "onDataChange: " + ds.getValue());
-
-
-                        HashMap<String, Factura> facturas = new HashMap<String,Factura>();
-                        facturas = ds.getValue(Factura.class);
-                        Log.i("factura", "onDataChange: " + facturas);
-
-                        for (String clave: facturas.keySet()) {
-                            Log.i("factura", "onDataChange: " + clave);
-                            for (Factura factura: facturas.values()) {
-                                facturas.values().;
-                                Log.i("factura", "onDataChange: "+ factura);
-
-                                invoice.add(new Factura( clave,factura.getDate(),factura.getProductos(),factura.getPrecioTotal()));
-                            }
-                        }
-
-                        Log.i("factura", "onDataChange: "+ invoice);
-
-
-
-                        //facturas = (ArrayList<Factura>) ds.getValue();
-                        Log.i("invoice", "onDataChange: " + facturas.values());
 */
                         }
 
                     }
                 }
 
-
                 //----------------------------------------RECYCLERVIEW--------------------------------------
-                recyclerView = root.findViewById(R.id.invoice_history_rv);
+                recyclerView = root.findViewById(R.id.my_products_recyclerView);
                 layoutManager = new LinearLayoutManager(getContext());
                 recyclerView.setLayoutManager(layoutManager);
-
-                invoiceAdapter = new InvoiceAdapter(invoice,getActivity(),new InvoiceAdapter.OnItemClickListener(){
+                adapterMyProducts = new AdapterMyProducts(myproductoList,getActivity(),new AdapterMyProducts.OnItemClickListener(){
                     @Override
                     public void onItemClick(Producto item) {
 
 
                     }
                 });
-                recyclerView.setAdapter(invoiceAdapter);
+                recyclerView.setAdapter(adapterMyProducts);
                 //-------------------------------------------------------------------------------------------
+
+
+                dialog.dismissDialog();
 
             }
             @Override
@@ -142,5 +139,6 @@ public class InvoiceHistoryFragment extends Fragment {
 
 
         return root;
+
     }
 }

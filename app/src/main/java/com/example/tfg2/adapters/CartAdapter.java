@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.example.tfg2.HomeActivity;
 import com.example.tfg2.Models.Producto;
 import com.example.tfg2.R;
+import com.example.tfg2.fragments.SegundaManoFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -22,7 +23,7 @@ import java.util.List;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     ImageView delete_cart;
-    List<Producto> productoList;
+    List<Producto> productoList_cart;
     Context context;
     final CartAdapter.OnItemClickListener listener;
 
@@ -32,7 +33,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
 
     public CartAdapter(List<Producto> productoList, Context context,CartAdapter.OnItemClickListener listener) {
-        this.productoList = productoList;
+        this.productoList_cart = productoList;
         this.context = context;
         this.listener = listener;
     }
@@ -51,7 +52,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull CartAdapter.ViewHolder holder, int position) {
 
-        Producto item = productoList.get(position);
+        Producto item = productoList_cart.get(position);
 
         holder.list_element_txt_titulo.setText(item.getTitle());
         holder.list_element_txt_precio.setText(item.getPrice() +" €");
@@ -62,6 +63,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             public void onClick(View view) {
                 HomeActivity.productoList_cart.remove(item);
                 HomeActivity.imageBadgeView.setBadgeValue(HomeActivity.productoList_cart.size());
+                if(item.getIdProducto() != null){
+                    SegundaManoFragment.productoList_second_hand.add(item);
+                }
                 Log.i("carrito", "onClick: " + HomeActivity.productoList_cart.toString());
                 notifyDataSetChanged();
             }
@@ -84,7 +88,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return productoList.size();
+        return productoList_cart.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder  {

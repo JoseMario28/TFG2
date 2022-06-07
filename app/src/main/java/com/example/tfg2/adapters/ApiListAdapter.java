@@ -65,7 +65,7 @@ public class ApiListAdapter extends RecyclerView.Adapter<ApiListAdapter.ViewHold
             public void onClick(View view) {
                 HomeActivity.productoList_cart.add(item);
                 HomeActivity.imageBadgeView.setBadgeValue(HomeActivity.productoList_cart.size());
-                Log.i("carrito", "onClick: " + HomeActivity.productoList_cart.toString());
+
             }
         });
 

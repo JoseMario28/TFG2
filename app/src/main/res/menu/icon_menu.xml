@@ -16,10 +16,26 @@
             android:icon="@drawable/ic_invoice_history"
             />
 
+
+    </group>
+
+    <group android:id="@+id/group1">
+
+        <item
+            android:id="@+id/menu_subasta"
+            android:title="Segunda Mano"
+            android:icon="@drawable/ic_subasta_24"
+            />
+        <item
+            android:id="@+id/menu_myProducts"
+            android:title="My Products"
+            android:icon="@drawable/mis_productos"
+            />
+
     </group>
 
 
-    <group android:id="@+id/group1" >
+    <group android:id="@+id/group2" >
 
         <item android:id="@+id/menu_logout"
             android:icon="@drawable/ic_logout"

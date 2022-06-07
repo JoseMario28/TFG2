@@ -8,9 +8,40 @@ public class Producto {
     public String category;
     public String description;
     public String image;
+//-----------------------------------mis productos y subasta---------------------------------------
+    String nombre;
+    String idProducto;
 
+    public Producto(String nombre,String title, String price, String category, String description, String image, String idProducto) {
+        this.nombre = nombre;
+        this.title = title;
+        this.price = price;
+        this.category = category;
+        this.description = description;
+        this.image = image;
+        this.idProducto = idProducto;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(String idProducto) {
+        this.idProducto = idProducto;
+    }
     //general un constructor con los datos de inserccion
 
+
+
+//--------------------------------------------------------------------------------------------------------
 
     public Producto() {
     }

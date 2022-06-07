@@ -33,7 +33,7 @@ import retrofit2.Response;
 public class HomeFragment extends Fragment {
 
     List<Producto> product_list = new ArrayList<>();
-    List<String> categoriesList = new ArrayList<>();
+    public static List<String> categoriesList = new ArrayList<>();
 
     String category;
     ApiListCategory apiListCategory;
@@ -129,12 +129,15 @@ public class HomeFragment extends Fragment {
     }
 
     public void cargar_productos_por_categoria(String category){
-        dialog.startLoadingDialog();
+
         if(category.equals("Todas")){
+
             cargar_prodcutos_api();
 
-        }else {
 
+
+        }else {
+            dialog.startLoadingDialog();
             ApiService apiService = ApiCliente.getCliente().create(ApiService.class);
 
             Call<List<Producto>> listCall = apiService.getSelectCategories(category);
@@ -203,6 +206,7 @@ public class HomeFragment extends Fragment {
                 recyclerView.setAdapter(apiListAdapter);
 
                 dialog.dismissDialog();
+
 
             }
 

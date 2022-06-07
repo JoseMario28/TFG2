@@ -1,14 +1,18 @@
 package com.example.tfg2.fragments;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +41,7 @@ public class CartFragment extends Fragment {
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
     CartAdapter cartAdapter;
+
     ExtendedFloatingActionButton bt_finalizar_compra;
 
     FirebaseAuth auth;
@@ -74,10 +79,28 @@ public class CartFragment extends Fragment {
                 database.getReference().child("facturas").child(user.getUid()).child(id).setValue(factura);
                 Log.i("factura", "onClick: " + todaysDate);
 
+
+                for (Producto p : HomeActivity.productoList_cart) {
+                    if (p.getIdProducto() != null){
+                        database.getReference().child("products_second_hand").child(p.getIdProducto()).removeValue();
+                    }
+
+                }
+
+                if(ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.SEND_SMS}, 1);
+                }
+
+               // SmsManager smsManager = SmsManager.getDefault();
+               // smsManager.sendTextMessage("687581839",null,"Eres un bobo, estoy probando lo del sms de la factura btw <3",null,null);
+
+
                 Intent intent = new Intent(getActivity(),HomeActivity.class);
                 startActivity(intent);
 
                 HomeActivity.productoList_cart.clear();
+
+
             }
         });
 

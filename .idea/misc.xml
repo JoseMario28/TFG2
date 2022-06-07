@@ -6,30 +6,40 @@
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1185" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/drawable/button_bg.xml" value="0.1795" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/drawable/edittext_bg.xml" value="0.116" />
+        <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.189" />
+        <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/drawable/ic_baseline_add_a_photo_24.xml" value="0.189" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1795" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.1795" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1795" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/drawable/ic_menu_camera.xml" value="0.1795" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.1795" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.1795" />
+        <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/drawable/ic_subasta_24.xml" value="0.189" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/drawable/side_nav_bar.xml" value="0.1795" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/drawable/view_bg.xml" value="0.2075" />
+        <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/layout/activity_add_product_to_my_products.xml" value="0.4" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/layout/activity_home.xml" value="0.2825520833333333" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/layout/activity_login_tab_fragment.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/layout/activity_main.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/layout/content_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/layout/fragment_add_product_to_my_products.xml" value="0.22962962962962963" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/layout/fragment_cart.xml" value="0.22962962962962963" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/layout/fragment_home.xml" value="0.264" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/layout/fragment_invoice_history.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/layout/fragment_login.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/layout/fragment_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/layout/fragment_my_products.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/layout/fragment_register.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/layout/fragment_segunda_mano.xml" value="0.22962962962962963" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/layout/list_category.xml" value="0.253125" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/layout/list_element.xml" value="0.253125" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/layout/list_invoice_history.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/layout/list_my_products.xml" value="0.4" />
+        <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/layout/list_second_hand_products.xml" value="0.253125" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/layout/loading_dialog.xml" value="0.2" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/layout/navheader.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/layout/spinner_item.xml" value="0.17685185185185184" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/layout/tem_view_pager.xml" value="0.253125" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/menu/activity_main_drawer.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/salie/AndroidStudioProjects/TFG2/app/src/main/res/menu/icon_menu.xml" value="0.25416666666666665" />

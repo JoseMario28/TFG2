@@ -40,6 +40,7 @@ public class ProfileFragment extends Fragment {
 
     String pass;
 
+
     FirebaseDatabase firebaseDatabase;
     DatabaseReference myRef;
     FirebaseUser user;
@@ -113,7 +114,7 @@ public class ProfileFragment extends Fragment {
 
     public void coger_datos_usuario_logueado(){
 
-dialog.startLoadingDialog();
+        dialog.startLoadingDialog();
 
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -130,6 +131,7 @@ dialog.startLoadingDialog();
                         profile_name2.setText(ds.child("nombre").getValue().toString());
                         profile_email.setText(ds.child("email").getValue().toString());
                         txt_password.setText(ds.child("password").getValue().toString());
+
 
                         Picasso.get().load("https://www.w3schools.com/howto/img_avatar.png").into(profile_img);
 

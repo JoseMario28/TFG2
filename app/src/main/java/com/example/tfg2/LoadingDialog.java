@@ -26,5 +26,6 @@ public class LoadingDialog {
 
     public void dismissDialog(){
         alertDialog.dismiss();
+
     }
 }
