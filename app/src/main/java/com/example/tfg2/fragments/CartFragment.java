@@ -91,18 +91,22 @@ public class CartFragment extends Fragment {
                 for (Producto p : HomeActivity.productoList_cart) {
 
                     if (p.getIdProducto() != null){
-                        database.getReference().child("products_second_hand").child(p.getIdProducto()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        database.getReference().child("products_second_hand").child(p.getIdProducto()).removeValue();/*.addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 for (Producto my_p : MyProductsFragment.myproductoList) {
-                                    Log.i("boolean", "onComplete: " + my_p);
+                                    if (MyProductsFragment.myproductoList.contains(p)) {
+
+
+                                    }
+                                    Log.i("boolean", "onComplete: " + my_p.getVendido());
 
                                     my_p.setVendido(true);
-                                    Log.i("boolean", "onComplete: " + my_p);
+                                    Log.i("boolean", "onComplete: " + my_p.getVendido());
                                 }
                             }
                         });
-
+*/
                         //updateProduct.put(p.getIdProducto(),p);
                         //database.getReference().child("myproducts").child(user.getUid()).updateChildren(updateProduct);
 

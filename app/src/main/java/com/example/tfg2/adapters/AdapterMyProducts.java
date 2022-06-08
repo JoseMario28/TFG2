@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tfg2.Models.Producto;
@@ -67,19 +68,20 @@ public class AdapterMyProducts extends RecyclerView.Adapter<AdapterMyProducts.Vi
     public void onBindViewHolder(@NonNull AdapterMyProducts.ViewHolder holder, int position) {
         Producto item = myproductoList.get(position);
 
-        if (item.getVendido() == true){
+        if (item.getVendido() != true){
             Log.i("boolean", "onBindViewHolder: " + item.getVendido());
-            holder.itemView.setBackgroundColor(Color.GREEN);
+            holder.cardView.setCardBackgroundColor(Color.GREEN);
+            holder.list_element_txt_my_product_price.setText("Vendido!");
         }else{
             Log.i("boolean", "no entra: " + item.getVendido());
-
+            holder.list_element_txt_my_product_price.setText(item.getPrice() +" €");
         }
 
         //Log.i("firebasedb", "onBindViewHolder: "+ item.getImage());
 
         holder.list_element_txt_id_myproduct.setText(item.getIdProducto());
         holder.txt_my_product_name.setText(item.getTitle());
-        holder.list_element_txt_my_product_price.setText(item.getPrice() +" €");
+
         holder.list_element_txt_myproduct_category.setText(item.getCategory());
        // holder.img_my_product.setImageBitmap();
         if (!item.getImage().equals("")) {
@@ -114,7 +116,10 @@ public class AdapterMyProducts extends RecyclerView.Adapter<AdapterMyProducts.Vi
                 myproductoList.remove(item);
                 database.child(user.getUid()).child(item.getIdProducto()).removeValue();
                 database2.child(item.getIdProducto()).removeValue();
+                holder.cardView.setCardBackgroundColor(Color.WHITE);
                 notifyDataSetChanged();
+
+
             }
         });
 
@@ -145,6 +150,7 @@ public class AdapterMyProducts extends RecyclerView.Adapter<AdapterMyProducts.Vi
 
         TextView list_element_txt_id_myproduct, list_element_txt_myproduct_category, list_element_txt_my_product_price,txt_my_product_name;
         ImageView img_my_product;
+        CardView cardView;
         FloatingActionButton bt_delete_my_product;
 
         public ViewHolder(@NonNull View itemView) {
@@ -156,7 +162,7 @@ public class AdapterMyProducts extends RecyclerView.Adapter<AdapterMyProducts.Vi
             list_element_txt_my_product_price = itemView.findViewById(R.id.list_element_txt_my_product_price);
             txt_my_product_name = itemView.findViewById(R.id.txt_my_product_name);
             img_my_product = itemView.findViewById(R.id.img_my_product);
-
+            cardView = itemView.findViewById(R.id.cardview);
         }
 
 

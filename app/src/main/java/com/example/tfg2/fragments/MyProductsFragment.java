@@ -70,7 +70,7 @@ public class MyProductsFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_my_products, container, false);
 
-        myproductoList.clear();
+
 
         add_product_to_my_products = root.findViewById(R.id.add_product_to_my_products);
         txt_no_sell_products = root.findViewById(R.id.txt_no_sell_products);
@@ -85,7 +85,9 @@ public class MyProductsFragment extends Fragment {
 
         dialog.startLoadingDialog();
 
-        database.addValueEventListener(new ValueEventListener() {
+myproductoList.clear();
+
+        database.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -100,10 +102,31 @@ public class MyProductsFragment extends Fragment {
 
                             //Log.i("factura", "HASHMAP " + nuevoValor.values());
                             for (Producto p : nuevoValor.values()) {
-                                Log.i("factura", "Factura: "+ p.toString());
-                                myproductoList.add(p);
+                                Log.i("boolean", "Factura: "+ p.getIdProducto());
 
-                            }
+
+                                        myproductoList.add(p);
+
+
+                                    for (Producto a: SegundaManoFragment.productoList_second_hand) {
+                                        Log.i("boolean", "segunda mano: " + a.getIdProducto());
+
+                                        if(p.getIdProducto().equals(a.getIdProducto())){
+                                            Log.i("boolean", "onComplete: " + p.getVendido());
+                                            p.setVendido(true);
+                                            Log.i("boolean", "onComplete: " + p.getVendido());
+
+                                        }else{
+
+                                        }
+
+                                    }
+                                }
+
+
+
+
+
 
 /*
 
@@ -112,6 +135,8 @@ public class MyProductsFragment extends Fragment {
 
                     }
                 }
+
+
 
                 //----------------------------------------RECYCLERVIEW--------------------------------------
                 recyclerView = root.findViewById(R.id.my_products_recyclerView);

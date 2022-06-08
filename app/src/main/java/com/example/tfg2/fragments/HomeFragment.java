@@ -3,6 +3,7 @@ package com.example.tfg2.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -15,17 +16,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.tfg2.HomeActivity;
 import com.example.tfg2.LoadingDialog;
 import com.example.tfg2.Models.Producto;
 import com.example.tfg2.R;
 import com.example.tfg2.adapters.AdapterFragment;
+import com.example.tfg2.adapters.Adapter_segunda_mano;
 import com.example.tfg2.adapters.ApiListAdapter;
 import com.example.tfg2.adapters.ApiListCategory;
 import com.example.tfg2.api.ApiCliente;
 import com.example.tfg2.api.ApiService;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,12 +59,14 @@ public class HomeFragment extends Fragment {
 
     LoadingDialog dialog;
 
+    DatabaseReference database;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         dialog = new LoadingDialog(getActivity());
-
+        database = FirebaseDatabase.getInstance().getReference("products_second_hand");
     }
 
     @Override
@@ -76,7 +88,7 @@ public class HomeFragment extends Fragment {
 
         cargar_prodcutos_api();
         cargar_categorias_api();
-
+        cargar_productos_segundamano();
 
         return root;
     }
@@ -125,6 +137,54 @@ public class HomeFragment extends Fragment {
                 //ha fallado la conexion
                 Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.i("productos", "onFailure: "+t.getMessage());
+
+            }
+        });
+    }
+
+    public void cargar_productos_segundamano(){
+        database.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                SegundaManoFragment.productoList_second_hand.clear();
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    //Log.i("factura", "onDataChange: " + ds);
+                    Map<String, Producto> nuevoValor = new HashMap<>();
+                    nuevoValor.put(ds.getKey(), ds.getValue(Producto.class));
+
+                    //Log.i("factura", "HASHMAP " + nuevoValor.values());
+                    for (Producto p : nuevoValor.values()) {
+                        Log.i("carrito", "Base de datos " + p);
+                        if (HomeActivity.productoList_cart.size() > 0) {
+                            for (Producto carrito : HomeActivity.productoList_cart) {
+                                Log.i("carrito", "onDataChange: " + carrito);
+                                if (p.getIdProducto() == carrito.getIdProducto()) {
+                                    Log.i("else", "onDataChange: asdasd");
+
+                                } else {
+
+                                    SegundaManoFragment.productoList_second_hand.add(p);
+                                    break;
+                                }
+                            }
+                        } else {
+                            SegundaManoFragment.productoList_second_hand.add(p);
+                        }
+
+                    }
+
+                }
+
+
+                //-------------------------------------------------------------------------------------------
+               // Log.i("jabali", "onCreateView: " + adapter_segunda_mano.getItemCount());
+                //Log.i("carrito", "CARRITO " + HomeActivity.productoList_cart);
+                //Log.i("aaaaaaaaaaaaaaaaaaaa", "PRODUCTOS " + productoList_second_hand);
+                //Log.i("aaaaaaaaaaaaaaaaaaaaaaa", "onDataChange: " + Adapter_segunda_mano.second_hand_productoList);
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });

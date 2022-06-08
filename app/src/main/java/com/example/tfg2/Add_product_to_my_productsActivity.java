@@ -153,6 +153,8 @@ public class Add_product_to_my_productsActivity extends AppCompatActivity {
 
         database.getReference().child("myproducts").child(user.getUid()).child(product_id).setValue(p);
         database.getReference().child("products_second_hand").child(product_id).setValue(p);
+
+
     }
 
     public void add_to_second_hand(){

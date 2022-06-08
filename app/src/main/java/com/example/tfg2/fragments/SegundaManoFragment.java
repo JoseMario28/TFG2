@@ -68,63 +68,19 @@ public class SegundaManoFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_segunda_mano, container, false);
 
 
-        database.addValueEventListener(new ValueEventListener() {
+        //----------------------------------------RECYCLERVIEW--------------------------------------
+        recyclerView = root.findViewById(R.id.segunda_mano_rv);
+        layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+
+        adapter_segunda_mano = new Adapter_segunda_mano(productoList_second_hand,getActivity(),new Adapter_segunda_mano.OnItemClickListener(){
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                productoList_second_hand.clear();
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    //Log.i("factura", "onDataChange: " + ds);
-                    Map<String, Producto> nuevoValor = new HashMap<>();
-                    nuevoValor.put(ds.getKey(), ds.getValue(Producto.class));
+            public void onItemClick(Producto item) {
 
-                    //Log.i("factura", "HASHMAP " + nuevoValor.values());
-                    for (Producto p : nuevoValor.values()) {
-                        Log.i("carrito", "Base de datos " + p);
-                        if (HomeActivity.productoList_cart.size() > 0) {
-                            for (Producto carrito : HomeActivity.productoList_cart) {
-                                Log.i("carrito", "onDataChange: " + carrito);
-                                if (p.getIdProducto() == carrito.getIdProducto()) {
-                                    Log.i("else", "onDataChange: asdasd");
-
-                                } else {
-
-                                    productoList_second_hand.add(p);
-                                    break;
-                                }
-                            }
-                        } else {
-                            productoList_second_hand.add(p);
-                        }
-
-                    }
-
-                }
-
-                //----------------------------------------RECYCLERVIEW--------------------------------------
-                recyclerView = root.findViewById(R.id.segunda_mano_rv);
-                layoutManager = new LinearLayoutManager(getContext());
-                recyclerView.setLayoutManager(layoutManager);
-
-                adapter_segunda_mano = new Adapter_segunda_mano(productoList_second_hand,getActivity(),new Adapter_segunda_mano.OnItemClickListener(){
-                    @Override
-                    public void onItemClick(Producto item) {
-
-
-                    }
-                });
-                recyclerView.setAdapter(adapter_segunda_mano);
-                //-------------------------------------------------------------------------------------------
-                Log.i("jabali", "onCreateView: " + adapter_segunda_mano.getItemCount());
-                Log.i("carrito", "CARRITO " + HomeActivity.productoList_cart);
-                Log.i("aaaaaaaaaaaaaaaaaaaa", "PRODUCTOS " + productoList_second_hand);
-                //Log.i("aaaaaaaaaaaaaaaaaaaaaaa", "onDataChange: " + Adapter_segunda_mano.second_hand_productoList);
-
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+        recyclerView.setAdapter(adapter_segunda_mano);
 
 
         return root;

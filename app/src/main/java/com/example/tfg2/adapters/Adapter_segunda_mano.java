@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -92,9 +93,14 @@ public class Adapter_segunda_mano extends RecyclerView.Adapter<Adapter_segunda_m
         holder.bt_add_second_hand_product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HomeActivity.productoList_cart.add(item);
-                HomeActivity.imageBadgeView.setBadgeValue(HomeActivity.productoList_cart.size());
-                second_hand_productoList.remove(item);
+                if(item.getNombre().equals(HomeActivity.nombre)){
+                    Toast.makeText(context, "No puedes comprar tus propios productos", Toast.LENGTH_LONG).show();
+                }else{
+                    HomeActivity.productoList_cart.add(item);
+                    HomeActivity.imageBadgeView.setBadgeValue(HomeActivity.productoList_cart.size());
+                    second_hand_productoList.remove(item);
+                }
+
 
 
                 notifyDataSetChanged();
