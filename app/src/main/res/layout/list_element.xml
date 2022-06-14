@@ -92,8 +92,8 @@ android:elevation="4dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="10dp"
-                android:src="@drawable/ic_add_shopping_cart_24"
-                app:backgroundTint="@color/bacano"
+                android:src="@drawable/agregar_carrito"
+                app:backgroundTint="@color/gold"
 
                 app:layout_constraintBottom_toBottomOf="parent"
 
@@ -105,8 +105,8 @@ android:elevation="4dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="10dp"
-                android:src="@drawable/ic_baseline_delete_24"
-                app:backgroundTint="@color/bacano"
+                android:src="@drawable/papelera"
+                app:backgroundTint="@color/gold"
 
                 app:layout_constraintBottom_toBottomOf="parent"
 

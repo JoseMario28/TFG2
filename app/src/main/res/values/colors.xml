@@ -8,7 +8,9 @@
     <color name="black">#000000</color>
     <color name="light_black">#A19E9E</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="bacano">#A55183</color>
+    <color name="bacano">#594D56</color>
     <color name="bacano2">#FFC895B4</color>
-
+    <color name="fondos">#EFEFEF</color>
+    <color name="letras">#594D46</color>
+    <color name="gold">#D1b280</color>
 </resources>

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.LoginFragment"
-    android:background="@color/white"
+    android:background="@color/fondos"
     >
 
     <!-- TODO: Update blank fragment layout -->
@@ -72,7 +72,7 @@ android:textColor="@color/black"
         android:layout_marginLeft="330dp"
         android:text="Sing In"
         android:textStyle="bold"
-        android:textColor="#A55183"
+        android:textColor="@color/letras"
         />
 
 </FrameLayout>

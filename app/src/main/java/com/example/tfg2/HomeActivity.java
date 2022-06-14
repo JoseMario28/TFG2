@@ -100,6 +100,7 @@ public class HomeActivity extends AppCompatActivity {
 
         toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
+
         toggle.syncState();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container,new HomeFragment()).commit();
@@ -112,11 +113,11 @@ public class HomeActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.menu_home:
                         temp = new HomeFragment();
-                        toolbar.setTitle("Productos");
+                        toolbar.setTitle("Products");
                         break;
                     case R.id.menu_setting:
                         temp = new ProfileFragment();
-                        toolbar.setTitle("Perfil");
+                        toolbar.setTitle("Profile");
                         break;
                     case R.id.menu_logout:
                         sign_out();
@@ -124,15 +125,15 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                     case R.id.menu_invoice_history:
                         temp = new InvoiceHistoryFragment();
-                        toolbar.setTitle("Facturas");
+                        toolbar.setTitle("Invoices");
                         break;
                     case R.id.menu_subasta:
                         temp = new SegundaManoFragment();
-                        toolbar.setTitle("Segunda Mano");
+                        toolbar.setTitle("Second Hand");
                         break;
                     case R.id.menu_myProducts:
                         temp = new MyProductsFragment();
-                        toolbar.setTitle("Mis prodcutos");
+                        toolbar.setTitle("My Products");
                         break;
 
                 }

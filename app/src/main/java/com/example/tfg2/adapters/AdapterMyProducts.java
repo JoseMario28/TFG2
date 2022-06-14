@@ -118,6 +118,22 @@ public class AdapterMyProducts extends RecyclerView.Adapter<AdapterMyProducts.Vi
                 database2.child(item.getIdProducto()).removeValue();
                 holder.cardView.setCardBackgroundColor(Color.WHITE);
                 notifyDataSetChanged();
+                new ImagenesFirebase().borrarFoto(new ImagenesFirebase.FotoStatus() {
+                    @Override
+                    public void FotoIsDownload(byte[] bytes) {
+
+                    }
+
+                    @Override
+                    public void FotoIsUpload() {
+
+                    }
+
+                    @Override
+                    public void FotoIsDelete() {
+
+                    }
+                },item.getImage());
 
 
             }

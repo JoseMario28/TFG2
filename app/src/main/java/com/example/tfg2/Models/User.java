@@ -8,13 +8,15 @@ public class User implements Serializable {
     String apellidos;
     String email;
     String password;
+    String direccion;
 
 
-    public User(String nombre, String apellidos, String email, String password) {
+    public User(String nombre, String apellidos, String email, String password,String direccion) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.email = email;
         this.password = password;
+        this.direccion = direccion;
     }
 
     public User(String nombre, String apellidos, String email) {
@@ -24,6 +26,14 @@ public class User implements Serializable {
     }
 
     public User() {
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public String getNombre() {

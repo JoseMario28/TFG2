@@ -33,7 +33,7 @@ import java.util.Map;
 
 
 public class ProfileFragment extends Fragment {
-    TextView profile_name,txt_password;
+    TextView profile_name,txt_password,txt_direccion;
     EditText profile_name2, profile_last_name, profile_email;
     ImageView profile_img;
     Button btn_edit_profile,btn_save_profile;
@@ -73,6 +73,7 @@ public class ProfileFragment extends Fragment {
         profile_last_name = root.findViewById(R.id.profile_last_name);
         profile_img = root.findViewById(R.id.profile_img);
         txt_password = root.findViewById(R.id.txt_password);
+        txt_direccion = root.findViewById(R.id.txt_direccion);
 
         Log.d("actuliza", "Actualizar " + pass);
 
@@ -96,9 +97,9 @@ public class ProfileFragment extends Fragment {
                 String model_profilelast_name = profile_last_name.getText().toString();
                 String model_profileEmail = profile_email.getText().toString();
                 String model_profile_pass = txt_password.getText().toString();
+                String model_direccion = txt_direccion.getText().toString();
 
-
-                User userModel = new User(model_profile_name2,model_profilelast_name,model_profileEmail,model_profile_pass);
+                User userModel = new User(model_profile_name2,model_profilelast_name,model_direccion,model_profile_pass,model_profileEmail);
 
                 Map<String, Object> updateProfile = new HashMap<String,Object>();
                 updateProfile.put(user.getUid(),userModel);
@@ -131,7 +132,8 @@ public class ProfileFragment extends Fragment {
                         profile_name2.setText(ds.child("nombre").getValue().toString());
                         //profile_email.setText(ds.child("email").getValue().toString());
                         txt_password.setText(ds.child("password").getValue().toString());
-
+                        txt_direccion.setText(ds.child("email").getValue().toString());
+                        profile_email.setText(ds.child("direccion").getValue().toString());
 
                         Picasso.get().load("https://www.w3schools.com/howto/img_avatar.png").into(profile_img);
 
