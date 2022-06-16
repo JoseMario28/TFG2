@@ -13,7 +13,7 @@ This project aims to alleviate the needs of buying and selling online that may a
 <img src="https://camo.githubusercontent.com/a57c02ec4694ccf6673a50dd66afde6ca08c8fa4ff4717cbafb6df352fd7878e/68747470733a2f2f64697374726561752e636f6d2f6769746875622e737667" width="50">
 <img src="https://user-images.githubusercontent.com/91139284/174148093-39cf242a-aa2c-4419-abb4-edd7001c888a.png" width="55">
 <img src="https://user-images.githubusercontent.com/91139284/174148196-f4f482ee-aa4c-427d-b55f-9a49360c0734.png" width="55">
-<img src="" width="55">
+
 
 
 ## How to Use the Project
