@@ -6,9 +6,11 @@ import androidx.core.content.ContextCompat;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.VectorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -79,8 +81,7 @@ public class Add_product_to_my_productsActivity extends AppCompatActivity {
 
                 add_to_my_prodcuts();
 
-                Intent intent = new Intent(Add_product_to_my_productsActivity.this,HomeActivity.class);
-                startActivity(intent);
+
             }
         });
 
@@ -99,7 +100,7 @@ public class Add_product_to_my_productsActivity extends AppCompatActivity {
         chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {pickIntent});
         startActivityForResult(chooserIntent, NUEVA_IMAGEN);
 
-        img_product.setTag("otro");
+
     }
 
     @Override
@@ -127,41 +128,64 @@ public class Add_product_to_my_productsActivity extends AppCompatActivity {
         String product_id= database.getReference().push().getKey();
         String product_category = sp_category.getSelectedItem().toString();
 
-
-        if(!img_product.getTag().equals("foto"))
-        {
-            new ImagenesFirebase().subirFoto(new ImagenesFirebase.FotoStatus() {
-                @Override
-                public void FotoIsDownload(byte[] bytes) {
-                }
-                @Override
-                public void FotoIsDelete() {
-                }
-                @Override
-                public void FotoIsUpload() {
-                    Toast.makeText(Add_product_to_my_productsActivity.this,"foto subida correcta",Toast.LENGTH_LONG).show();
-                }
-            },product_name, product_price, img_product);
+          img_product.getDrawable();
 
 
-            p = new Producto(false,HomeActivity.nombre,product_name, product_price,product_category,product_description,product_name+"/"+String.valueOf(product_price)+".png",product_id);
+        if (product_name.isEmpty()){
+            edt_product_name.setError("Campo requerido");
+
+        }else if (product_description.isEmpty()){
+            edt_product_description.setError("Campo requerido");
+
+        }else if (product_price.isEmpty()) {
+            edt_product_price.setError("Campo requerido");
+     /*   }else if(img_product.getTag().equals("foto")){
+            Toast.makeText(this, "Selecciones una imagen ", Toast.LENGTH_LONG).show();
+            Log.i("tagimg", "add_to_my_prodcuts: " + "no hace nada");*/
+        }else{
+
+
+            if(img_product.getDrawable().getConstantState() != ContextCompat.getDrawable(this,R.drawable.ic_baseline_add_a_photo_24).getConstantState())
+            {
+                new ImagenesFirebase().subirFoto(new ImagenesFirebase.FotoStatus() {
+                    @Override
+                    public void FotoIsDownload(byte[] bytes) {
+                    }
+                    @Override
+                    public void FotoIsDelete() {
+                    }
+                    @Override
+                    public void FotoIsUpload() {
+                        Toast.makeText(Add_product_to_my_productsActivity.this,"foto subida correcta",Toast.LENGTH_LONG).show();
+                    }
+                },product_name, product_price, img_product);
+
+
+                p = new Producto(false,HomeActivity.nombre,product_name, product_price,product_category,product_description,product_name+"/"+String.valueOf(product_price)+".png",product_id);
+
+                database.getReference().child("myproducts").child(user.getUid()).child(product_id).setValue(p);
+                database.getReference().child("products_second_hand").child(product_id).setValue(p);
+
+
+                Intent intent = new Intent(Add_product_to_my_productsActivity.this,HomeActivity.class);
+                startActivity(intent);
+            }
+            else{
+                Toast.makeText(Add_product_to_my_productsActivity.this,"ERROR Seleccione una imagen",Toast.LENGTH_LONG).show();
+                Log.i("tagimg", "add_to_my_prodcuts: " + "erro");
+            }
+
+
+
         }
-        else{
-            Toast.makeText(Add_product_to_my_productsActivity.this,"ERROR Seleccione una imagen",Toast.LENGTH_LONG).show();
-        }
 
 
-        database.getReference().child("myproducts").child(user.getUid()).child(product_id).setValue(p);
-        database.getReference().child("products_second_hand").child(product_id).setValue(p);
+
+
+
 
 
     }
 
-    public void add_to_second_hand(){
 
-
-
-
-
-    }
 }

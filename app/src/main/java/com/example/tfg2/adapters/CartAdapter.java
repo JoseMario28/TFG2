@@ -1,6 +1,9 @@
 package com.example.tfg2.adapters;
 
+import static com.example.tfg2.utilidades.ImagenesBlobBitmap.decodeSampledBitmapFrombyteArray;
+
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +19,8 @@ import com.example.tfg2.HomeActivity;
 import com.example.tfg2.Models.Producto;
 import com.example.tfg2.R;
 import com.example.tfg2.fragments.SegundaManoFragment;
+import com.example.tfg2.utilidades.Configuracion;
+import com.example.tfg2.utilidades.ImagenesFirebase;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -79,10 +84,41 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         });
 
 
-        //tratamiento de la imagen con glide
-        Glide.with(context)
-                .load(item.getImage())
-                .into(holder.list_element_img);
+        if (item.getNombre() != null){
+            if (!item.getImage().equals("")) {
+                new ImagenesFirebase().descargarFoto(new ImagenesFirebase.FotoStatus() {
+                    @Override
+                    public void FotoIsDownload(byte[] bytes) {
+                        if(bytes != null) {
+                            Log.i("firebasedb","foto descargada correctamente");
+                            Bitmap fotob = decodeSampledBitmapFrombyteArray(bytes, Configuracion.ALTO_IMAGENES_BITMAP, Configuracion.ANCHO_IMAGENES_BITMAP);
+                            holder.list_element_img.setImageBitmap(fotob);
+                        }
+                        else{
+                            Log.i("firebasedb","foto no descargada correctamente");
+                        }
+                    }
+                    @Override
+                    public void FotoIsUpload() {
+                    }
+                    @Override
+                    public void FotoIsDelete() {
+                    }
+                },item.getImage());
+
+            }
+            else{
+                Log.i("firebasedb", "onBindViewHolder: no entro" );
+            }
+        }else{
+            //tratamiento de la imagen con glide
+            Glide.with(context)
+                    .load(item.getImage())
+                    .into(holder.list_element_img);
+        }
+
+
+
 
     }
 

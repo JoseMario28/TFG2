@@ -119,7 +119,7 @@ public class CartFragment extends Fragment {
                 }
 
                // SmsManager smsManager = SmsManager.getDefault();
-               // smsManager.sendTextMessage("687581839",null,"Eres un bobo, estoy probando lo del sms de la factura btw <3",null,null);
+               // smsManager.sendTextMessage("687581839",null," estoy probando lo del sms de la factura btw <3",null,null);
 
 
                 Intent intent = new Intent(getActivity(),HomeActivity.class);
